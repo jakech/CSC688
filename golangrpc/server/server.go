@@ -13,6 +13,7 @@ type Product struct {
     Name            string  `json:"name"`
     Description     string  `json:"desc"`
     Price           float64 `json:"price"`
+    CatId           string  `json:"cat_id"`
 }
 
 type Server struct{
