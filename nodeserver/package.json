@@ -1,0 +1,10 @@
+{
+  "name": "nodeserver",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "grpc": "^1.4.1",
+    "shortid": "^2.2.8"
+  }
+}
