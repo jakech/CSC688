@@ -2,7 +2,9 @@
 The Product Service is written in golang and is in the `golangrpc/` directory. Please note that `proto/` directory is shared by both services.
 
 ### Dependency
-`$ go get google.golang.org/grpc`
+```
+$ go get google.golang.org/grpc
+```
 
 ### Run
 Under `golangrpc/` run `$ go run main.go`
@@ -12,7 +14,14 @@ This Category Service is written in node.js and is in the `nodeserver/` director
 
 ### Dependency
 Use [npm](https://www.npmjs.com) or [yarn](https://yarnpkg.com)
-`$ npm install` or `$ yarn install`
+
+```
+$ npm install
+```
+or
+```
+$ yarn install
+```
 
 ### Run
 Under `nodeserver/` run `$ node index.js`
@@ -29,8 +38,12 @@ Install the protoc compiler that is used to generate gRPC service code. The simp
 
 Next, install the protoc plugin for Go
 
-`$ go get -u github.com/golang/protobuf/protoc-gen-go`
+```
+$ go get -u github.com/golang/protobuf/protoc-gen-go
+```
 
 The compiler plugin, `protoc-gen-go`, will be installed in `$GOBIN`, defaulting to `$GOPATH/bin`. It must be in your `$PATH` for the protocol compiler, `protoc`, to find it.
 
-`$ export PATH=$PATH:$GOPATH/bin`
+```
+$ export PATH=$PATH:$GOPATH/bin
+```
