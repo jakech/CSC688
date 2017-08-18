@@ -4,6 +4,7 @@ The Product Service is written in golang and is in the `golangrpc/` directory. P
 ### Dependency
 ```
 $ go get google.golang.org/grpc
+$ go get github.com/rs/xid
 ```
 
 ### Run
