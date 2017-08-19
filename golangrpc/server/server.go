@@ -1,6 +1,7 @@
 package server
 
 import (
+    "log"
     "errors"
     "encoding/json"
     "golang.org/x/net/context"
@@ -25,6 +26,7 @@ func New() *Server {
 }
 
 func (s *Server) Create(ctx context.Context, req *pb.Request) (*pb.Response, error) {
+    log.Printf("Create: %s\n", req.Data)
     var product Product
     guid := xid.New().String()
 
@@ -47,6 +49,7 @@ func (s *Server) Create(ctx context.Context, req *pb.Request) (*pb.Response, err
 }
 
 func (s *Server) Get(ctx context.Context, req *pb.Request) (*pb.Response, error) {
+    log.Printf("Get: %s\n", req.Data)
     if product, ok := s.products[string(req.Data)]; ok {
         b, err := json.Marshal(product)
 
@@ -62,6 +65,7 @@ func (s *Server) Get(ctx context.Context, req *pb.Request) (*pb.Response, error)
 }
 
 func (s *Server) Update(ctx context.Context, req *pb.Request) (*pb.Response, error) {
+    log.Printf("Update: %s\n", req.Data)
     var product Product
     err := json.Unmarshal([]byte(req.Data), &product)
 
@@ -86,6 +90,7 @@ func (s *Server) Update(ctx context.Context, req *pb.Request) (*pb.Response, err
 }
 
 func (s *Server) Delete(ctx context.Context, req *pb.Request) (*pb.Response, error) {
+    log.Printf("Delete: %s\n", req.Data)
     if _, ok := s.products[string(req.Data)]; ok {
         delete(s.products, string(req.Data))
         return &pb.Response{ Status: 1, Data: "" }, nil
