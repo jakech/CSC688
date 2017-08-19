@@ -6,14 +6,13 @@ function handleCreate(call, callback) {
     var newCat
     try {
         newCat = JSON.parse(call.request.data)
+        newCat.id = id
+        categories[id] = newCat
+        callback(null, { status: 1, data: JSON.stringify(newCat) })
     } catch (err) {
         callback(err, { status: -1 })
     }
-
-    newCat.id = id
-    categories[id] = newCat
     console.log('created:', newCat)
-    callback(null, { status: 1, data: JSON.stringify(newCat) })
 }
 function handleGet(call, callback) {
     var id = call.request.data
@@ -29,17 +28,17 @@ function handleUpdate(call, callback) {
     var cat
     try {
         cat = JSON.parse(call.request.data)
+        if (cat.id in categories) {
+            console.log('before Update:', JSON.stringify(categories))
+            categories[cat.id] = cat
+            console.log('after Update:', JSON.stringify(categories))
+            callback(null, { status: 1, data: JSON.stringify(cat) })
+        } else {
+            console.log('Update Not found')
+            callback(null, { status: 0, data: 'Category not found' })
+        }
     } catch (err) {
         callback(err, { status: -1 })
-    }
-    if (cat.id in categories) {
-        console.log('before Update:', JSON.stringify(categories))
-        categories[cat.id] = cat
-        console.log('after Update:', JSON.stringify(categories))
-        callback(null, { status: 1, data: JSON.stringify(cat) })
-    } else {
-        console.log('Update Not found')
-        callback(null, { status: 0, data: 'Category not found' })
     }
 }
 function handleDelete(call, callback) {
