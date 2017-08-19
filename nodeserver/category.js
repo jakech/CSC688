@@ -2,8 +2,13 @@ var shortid = require('shortid')
 var categories = {}
 
 function handleCreate(call, callback) {
-    var newCat = JSON.parse(call.request.data)
     var id = shortid.generate()
+    var newCat
+    try {
+        newCat = JSON.parse(call.request.data)
+    } catch (err) {
+        callback(err, { status: -1 })
+    }
 
     newCat.id = id
     categories[id] = newCat
@@ -21,7 +26,12 @@ function handleGet(call, callback) {
     }
 }
 function handleUpdate(call, callback) {
-    var cat = JSON.parse(call.request.data)
+    var cat
+    try {
+        cat = JSON.parse(call.request.data)
+    } catch (err) {
+        callback(err, { status: -1 })
+    }
     if (cat.id in categories) {
         console.log('before Update:', JSON.stringify(categories))
         categories[cat.id] = cat
